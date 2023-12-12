@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis Web App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #app {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 300px;
+            max-width: 100%;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: space-around;
+            background-color: #4CAF50;
+            padding: 10px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .nav-menu div {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-menu div:hover {
+            background-color: #45a049;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <!-- Navigation Menu -->
+    <div class="nav-menu">
+        <div @click="goToPage('main')">Main</div>
+        <div @click="goToPage('login')">Login</div>
+        <div @click="goToPage('history')">History</div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Board Selection -->
+        <label for="board">Select a board:</label>
+        <select v-model="selectedBoard" id="board">
+            <option value="all">All Boards</option>
+            <option v-for="board in boards" :value="board" :key="board">{{ board }}</option>
+        </select>
+
+        <!-- Term Input -->
+        <label for="term">Enter a term:</label>
+        <input v-model="selectedTerm" type="text" id="term" placeholder="e.g., Sentiment Analysis">
+
+        <!-- Analyze Button -->
+        <button @click="analyzeSentiment">Analyze Sentiment</button>
+
+        <!-- Display Results -->
+        <div v-if="sentimentResult">
+            <h2>Sentiment Analysis Result:</h2>
+            <p>{{ sentimentResult }}</p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="app.js"></script>
+</body>
+</html>
